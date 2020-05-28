@@ -130,16 +130,14 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
     }
 
     public void guardarAgenda() {
-        try {
-            PrintWriter f = new PrintWriter(new FileWriter(
-                    System.getProperty("user.home") + System.getProperty("file.separator") + "agenda.txt", true));
 
+        try (PrintWriter f = new PrintWriter(new FileWriter(
+                System.getProperty("user.home") + System.getProperty("file.separator") + "agenda.txt", true))) {
             f.println(txtPulsados.getText());
-
-            f.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.err.println("Error");
         }
+
     }
 
     @Override
